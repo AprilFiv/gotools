@@ -36,7 +36,7 @@ func (log *Aflog) Warn(content string) {
 }
 func (log *Aflog) checkTimeOut(){
 	 var1 := strings.Split(log.logName,".")
-	 suffix :=var1[len(var1)]
+	 suffix :=var1[len(var1)-1]
 	 if suffix!=time.Now().Format("2006-01-02"){
 	 	log.fd.Close();
 	 	currentLog = GetLog(currentLog.appName)
