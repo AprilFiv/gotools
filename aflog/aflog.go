@@ -62,9 +62,12 @@ func GetLog(name string) Aflog {
 	if !pathExists(filePath) {
 		logFile, _ = os.Create(filePath)
 		logger = log.New(logFile, "[Info] ",log.LstdFlags)
+		logger.Println("test")
+		defer logFile.Close()
+	} else {
+		logFile, _ = os.OpenFile(filePath, os.O_APPEND, 0)
+		logger = log.New(logFile, "[Info] ", log.LstdFlags)
 	}
-	logFile,_ = os.OpenFile(filePath,os.O_APPEND,0)
-	logger = log.New(logFile, "[Info] ",log.LstdFlags)
 	aflog := Aflog{
 		appName: name,
 		logName: filePath,
