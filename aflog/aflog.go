@@ -4,7 +4,6 @@ import (
 	"os"
 	"time"
 	"log"
-	"strings"
 )
 
 type Aflog struct {
