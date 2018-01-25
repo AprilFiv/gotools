@@ -9,8 +9,6 @@ import (
 type Aflog struct {
 	appName string
 	logName string
-	logger  *log.Logger
-	fd *os.File
 }
 
 func (currentlog *Aflog) Info(content string) {
@@ -21,7 +19,7 @@ func (currentlog *Aflog) Info(content string) {
 		logger.Println(content)
 		defer logFile.Close()
 	} else {
-		logFile, _ := os.OpenFile(currentlog.logName, os.O_APPEND, 0)
+		logFile, _ := os.OpenFile(currentlog.logName, os.O_RDWR|os.O_APPEND, 0)
 		logger := log.New(logFile, "[Info] ", log.LstdFlags)
 		logger.Println(content)
 		defer logFile.Close()
@@ -35,7 +33,7 @@ func (currentlog *Aflog) Error(content string) {
 		logger.Println(content)
 		defer logFile.Close()
 	} else {
-		logFile, _ := os.OpenFile(currentlog.logName, os.O_APPEND, 0)
+		logFile, _ := os.OpenFile(currentlog.logName, os.O_RDWR|os.O_APPEND, 0)
 		logger := log.New(logFile, "[Error] ", log.LstdFlags)
 		logger.Println(content)
 		defer logFile.Close()
@@ -49,7 +47,7 @@ func (currentlog *Aflog) Debug(content string) {
 		logger.Println(content)
 		defer logFile.Close()
 	} else {
-		logFile, _ := os.OpenFile(currentlog.logName, os.O_APPEND, 0)
+		logFile, _ := os.OpenFile(currentlog.logName, os.O_RDWR|os.O_APPEND, 0)
 		logger := log.New(logFile, "[Debug] ", log.LstdFlags)
 		logger.Println(content)
 		defer logFile.Close()
@@ -63,7 +61,7 @@ func (currentlog *Aflog) Warn(content string) {
 		logger.Println(content)
 		defer logFile.Close()
 	} else {
-		logFile, _ := os.OpenFile(currentlog.logName, os.O_APPEND, 0)
+		logFile, _ := os.OpenFile(currentlog.logName, os.O_RDWR|os.O_APPEND, 0)
 		logger := log.New(logFile, "[Warn] ", log.LstdFlags)
 		logger.Println(content)
 		defer logFile.Close()
